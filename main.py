@@ -14,6 +14,9 @@ import os
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
+from Vista import *
+from Pug import *
+
 #############################################################################
 # Funciones Gráficas
 #############################################################################
@@ -77,16 +80,19 @@ reshape(WINDOW_SIZE[0], WINDOW_SIZE[1])
 clock = pygame.time.Clock()
 
 # Se crean los modelos
+pug = Pug()
+vista = Vista()
 
 # Bucle principal
 while True:
-    # Setea el reloj
+    # Setea el reloj del juego
     clock.tick(FPS)
     # Busca eventos de aplicación
     for event in pygame.event.get():
         if event.type == QUIT: # Cierra la aplicación
                exit()
 
+    vista.dibujar(pug)
     #Vuelca lo dibujado en pantalla
     pygame.display.flip()
 
