@@ -39,7 +39,7 @@ def init():
     Inicia openGL
     :return: None
     """
-    glClearColor(0.0, 0.0, 0.0, 0.0) # Color de fondo
+    glClearColor(1.0, 1.0, 1.0, 0.0) # Color de fondo
     glClearDepth(1.0) # Profundidad de dibujo
     glDisable(GL_DEPTH_TEST) # Se inabilita depth test
     glShadeModel(GL_SMOOTH) # Activa el dibujo suave
@@ -58,7 +58,7 @@ def reshape(w, h):
     h = max(h, 1)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    gluOrtho2D(0.0, w, 0.0, h)
+    gluOrtho2D(0.0, w, 0.0, h) #define la matriz de proyeccion ortogonal 2D
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
