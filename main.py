@@ -16,6 +16,8 @@ from OpenGL.GLU import *
 
 from Vista import *
 from Pug import *
+from Muros1 import *
+from Muros2 import *
 
 #############################################################################
 # Funciones Gráficas
@@ -80,7 +82,7 @@ reshape(WINDOW_SIZE[0], WINDOW_SIZE[1])
 clock = pygame.time.Clock()
 
 # Se crean los modelos
-pug = Pug()
+pug = Muros2()
 vista = Vista()
 
 # Bucle principal
