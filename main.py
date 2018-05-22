@@ -18,6 +18,7 @@ from Vista import *
 from Pug import *
 from Muros1 import *
 from Muros2 import *
+from Bombas import *
 
 #############################################################################
 # Funciones Gráficas
@@ -70,34 +71,43 @@ def reshape(w, h):
 
 # Constantes
 WINDOW_SIZE = [800, 600] # [Ancho, Alto]
-FPS = 60 # Fotogramas por segundo
+FPS = 90 # Fotogramas por segundo
 TITULO = "Bomberman" # Titulo del programa
 
 # Inicialización de pantalla
 initPygame(WINDOW_SIZE[0], WINDOW_SIZE[1], TITULO)
 init()
 reshape(WINDOW_SIZE[0], WINDOW_SIZE[1])
-
-# Se crea el reloj del juego
-clock = pygame.time.Clock()
+clock = pygame.time.Clock() # Se crea el reloj del juego
+run = True # condicion booleana True para iterar
 
 # Se crean los modelos
-pug = Muros2()
+pug = Pug(300, 300, 10, 10)
 vista = Vista()
 
-# Bucle principal
-while True:
-    # Setea el reloj del juego
-    clock.tick(FPS)
-    # Busca eventos de aplicación
-    for event in pygame.event.get():
-        if event.type == QUIT: # Cierra la aplicación
-               exit()
-
+# infinitamente hasta quebrar el ciclo con otra condicion
+while run:
     vista.dibujar(pug)
-    #Vuelca lo dibujado en pantalla
-    pygame.display.flip()
+
+    for event in pygame.event.get():
+        # para dada evento almacenado en "obtener eventos"
+        if event.type == QUIT: # cick sobre cerrar para salir
+               run = False
+        if event.type == KEYDOWN: # al presionar una tecla
+            if event.key == K_ESCAPE: # si se presiona ESC
+                run = False
+
+    keys = pygame.key.get_pressed()
+    if keys[K_LEFT]:
+        pug.moverIzquierda()
+    elif keys[K_RIGHT]:
+        pug.moverDerecha()
+    elif keys[K_DOWN]:
+        pug.moverAbajo()
+    elif keys[K_UP]:
+        pug.moverArriba()
+
+    pygame.display.flip() # redibuja la ventana con el buffer almacenado
+    clock.tick(FPS)  # Setea el reloj del juego para ajustar a la cantidad de FPS dados
 
 
-# termina pygame (cerrar ventana)
-pygame.quit()

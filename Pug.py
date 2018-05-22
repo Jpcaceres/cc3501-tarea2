@@ -5,12 +5,31 @@ from OpenGL.GL import *
 from math import *
 
 class Pug:
-    def __init__(self):
-        self.x = 300 # Centro cabeza eje x
-        self.y = 300 # Centro cabeza eje y
+    def __init__(self, x, y, dx, dy):
+        self.x = x  # Centro cabeza eje x
+        self.y = y # Centro cabeza eje y
+        self.dx = dx
+        self.dy = dx
+        self.life = 3
         self.sprite = 1
+
+    def moverIzquierda(self):
+        self.x = self.x - self.dx
+        self.sprite = self.sprite * (-1)
+
+    def moverDerecha(self):
+        self.x = self.x + self.dx
+        self.sprite = self.sprite * (-1)
+
+    def moverArriba(self):
+        self.y = self.y + self.dy
+
+    def moverAbajo(self):
+        self.y = self.y - self.dy
+
     def dibujar(self):
         glPushMatrix()
+        glScalef(0.5, 0.5, 1.0)
 
         # Torso
         glBegin(GL_POLYGON)
