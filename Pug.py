@@ -9,27 +9,46 @@ class Pug:
         self.x = x  # Centro cabeza eje x
         self.y = y # Centro cabeza eje y
         self.dx = dx
-        self.dy = dx
+        self.dy = dy
         self.life = 3
         self.sprite = 1
 
+    def velocidadPor2(self):
+        self.dx = 2 * self.dx
+        self.dy = 2 * self.dy
+
     def moverIzquierda(self):
-        self.x = self.x - self.dx
+        x1 = self.x - self.dx
+        yInit = (self.y - 480) % 600
         self.sprite = self.sprite * (-1)
+        if x1 > 300 and yInit == 0:
+            self.x = x1
+
 
     def moverDerecha(self):
-        self.x = self.x + self.dx
+        x2 = self.x + self.dx
+        yInit = (self.y - 480) % 600
         self.sprite = self.sprite * (-1)
+        if x2 < 3260 and yInit == 0:
+            self.x = x2
 
     def moverArriba(self):
-        self.y = self.y + self.dy
+        y1 = self.y + self.dy
+        xInit = (self.x - 360) % 480
+        self.sprite = self.sprite * (-1)
+        if y1 < 2940 and xInit == 0:
+            self.y = y1
 
     def moverAbajo(self):
-        self.y = self.y - self.dy
+        y2 = self.y - self.dy
+        xInit = (self.x - 360) % 480
+        self.sprite = self.sprite * (-1)
+        if y2 > 420 and xInit == 0:
+            self.y = y2
 
     def dibujar(self):
         glPushMatrix()
-        glScalef(0.5, 0.5, 1.0)
+        glScalef(0.25, 0.2, 1.0)
 
         # Torso
         glBegin(GL_POLYGON)

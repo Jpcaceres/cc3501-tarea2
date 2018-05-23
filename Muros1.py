@@ -2,13 +2,14 @@
 from OpenGL.GL import *
 
 class Muros1:
-    def __init__(self):
-        self.x = 300 # Centro muro indestructible eje x
-        self.y = 300 # Centro muro indestructible eje y
+    def __init__(self, x, y):
+        self.x = x # Centro muro indestructible eje x
+        self.y = y # Centro muro indestructible eje y
+
 
     def dibujar(self):
         glPushMatrix()
-
+        glScalef(0.5, 0.5, 1.0)
         # Bloque central
         glBegin(GL_POLYGON)
         glColor4f(102.0 / 255, 107.0 / 255, 117.0 / 255, 1.0)

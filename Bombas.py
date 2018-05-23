@@ -4,12 +4,36 @@ from math import *
 
 class Bombas:
     def __init__(self):
-        self.x = 300 # Centro Bomba
-        self.y = 300 # Centro Bomba
+        self.x = -30 # Centro Bomba
+        self.y = -30 # Centro Bomba
+
+    def transladar(self, x, y):
+        self.x = x
+        self.y = y - 60
+
+    def explotar(self, arriba, abajo, izquierda, derecha):
+        glPushMatrix()
+        glScalef(0.25, 0.2, 1.0)
+        glBegin(GL_POLYGON)
+        glColor4f(242.0 / 255, 70.0 / 255, 36.0 / 255, 1.0)
+        glVertex2f(self.x - 120, self.y + 150 + 300 * arriba)
+        glVertex2f(self.x + 120, self.y + 150 + 300 * arriba)
+        glVertex2f(self.x + 120, self.y - 150 - 300 * abajo)
+        glVertex2f(self.x - 120, self.y - 150 - 300 * abajo)
+        glEnd()
+        glBegin(GL_POLYGON)
+        glColor4f(242.0 / 255, 70.0 / 255, 36.0 / 255, 1.0)
+        glVertex2f(self.x + 120 + 240 * derecha, self.y - 150)
+        glVertex2f(self.x + 120 + 240 * derecha, self.y + 150)
+        glVertex2f(self.x - 120 - 240 * izquierda, self.y + 150)
+        glVertex2f(self.x - 120 - 240 * izquierda, self.y - 150)
+        glEnd()
+        glPopMatrix()
+
 
     def dibujar(self):
         glPushMatrix()
-
+        glScalef(0.25, 0.2, 1.0)
         # Forma
         glBegin(GL_TRIANGLE_FAN)
         glColor4f(34.0 / 255, 35.0 / 255, 35.0 / 255, 1.0)
@@ -79,5 +103,8 @@ class Bombas:
             ang_i = ang * i
             glVertex(self.x + cos(ang_i) * (radio), self.y + 167 + sin(ang_i) * radio)
         glEnd()
+
+
+
 
         glPopMatrix()

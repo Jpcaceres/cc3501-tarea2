@@ -42,7 +42,7 @@ def init():
     Inicia openGL
     :return: None
     """
-    glClearColor(1.0, 1.0, 1.0, 0.0) # Color de fondo
+    glClearColor(11.0 / 255.0, 130.0 / 255.0, 2.0 / 255.0 , 0.0) # Color de fondo
     glClearDepth(1.0) # Profundidad de dibujo
     glDisable(GL_DEPTH_TEST) # Se inabilita depth test
     glShadeModel(GL_SMOOTH) # Activa el dibujo suave
@@ -70,8 +70,8 @@ def reshape(w, h):
 #############################################################################
 
 # Constantes
-WINDOW_SIZE = [800, 600] # [Ancho, Alto]
-FPS = 90 # Fotogramas por segundo
+WINDOW_SIZE = [900, 660] # [Ancho, Alto]
+FPS = 60 # Fotogramas por segundo
 TITULO = "Bomberman" # Titulo del programa
 
 # Inicialización de pantalla
@@ -80,15 +80,24 @@ init()
 reshape(WINDOW_SIZE[0], WINDOW_SIZE[1])
 clock = pygame.time.Clock() # Se crea el reloj del juego
 run = True # condicion booleana True para iterar
+tBomba = 9999
+xPug = 360
+yPug = 480
 
 # Se crean los modelos
-pug = Pug(300, 300, 10, 10)
+pug = Pug(xPug, yPug, 120.0, 150.0)
+bomba = Bombas()
 vista = Vista()
 
+t0 = pygame.time.get_ticks()  # tiempo inicial
 # infinitamente hasta quebrar el ciclo con otra condicion
 while run:
-    vista.dibujar(pug)
+    # 0: CONTROL DEL TIEMPO
+    t1 = pygame.time.get_ticks()  # tiempo actual
+    dt = (t1 - t0)  # diferencial de tiempo asociado a la iteración
+    t0 = t1  # actualizar tiempo inicial para siguiente iteración
 
+    vista.dibujar(pug)
     for event in pygame.event.get():
         # para dada evento almacenado en "obtener eventos"
         if event.type == QUIT: # cick sobre cerrar para salir
@@ -106,7 +115,18 @@ while run:
         pug.moverAbajo()
     elif keys[K_UP]:
         pug.moverArriba()
+    elif keys[K_a]:
+        xPug = pug.x
+        yPug = pug.y
+        vista.poner(pug, bomba)
+        tBomba = 0.0
 
+    if tBomba < 3000.0: #3 segundos aproximados
+        bomba.dibujar()
+    elif tBomba > 2500.0 and tBomba < 3500.0:
+        vista.explotar(xPug, yPug, bomba, 1)
+
+    tBomba = tBomba + dt
     pygame.display.flip() # redibuja la ventana con el buffer almacenado
     clock.tick(FPS)  # Setea el reloj del juego para ajustar a la cantidad de FPS dados
 
