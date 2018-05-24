@@ -36,7 +36,7 @@ class Bombas:
         glScalef(0.25, 0.2, 1.0)
         # Forma
         glBegin(GL_TRIANGLE_FAN)
-        glColor4f(34.0 / 255, 35.0 / 255, 35.0 / 255, 1.0)
+        glColor4f(0.0 / 255, 0.0 / 255, 0.0 / 255, 1.0)
         glVertex2f(self.x, self.y)  # Centro de la cabeza
         radio = 100
         ang = 2 * pi / 20
@@ -58,7 +58,7 @@ class Bombas:
 
         # Cuadrado
         glBegin(GL_POLYGON)
-        glColor4f(34.0 / 255, 35.0 / 255, 35.0 / 255, 1.0)
+        glColor4f(0.0 / 255, 0.0 / 255, 0.0 / 255, 1.0)
         glVertex2f(self.x + 30, self.y + 80)
         glVertex2f(self.x - 30, self.y + 80)
         glVertex2f(self.x - 30, self.y + 130)

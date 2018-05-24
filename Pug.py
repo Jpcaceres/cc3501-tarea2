@@ -1,49 +1,46 @@
 # -*- coding: iso-8859-1 -*-
 
-from Vector2D import *
 from OpenGL.GL import *
 from math import *
 
+
 class Pug:
+
     def __init__(self, x, y, dx, dy):
         self.x = x  # Centro cabeza eje x
-        self.y = y # Centro cabeza eje y
+        self.y = y  # Centro cabeza eje y
         self.dx = dx
         self.dy = dy
-        self.life = 3
+        self.life = True
         self.sprite = 1
 
     def velocidadPor2(self):
         self.dx = 2 * self.dx
         self.dy = 2 * self.dy
 
-    def moverIzquierda(self):
+    def moverIzquierda(self, lista1, lista2):
         x1 = self.x - self.dx
-        yInit = (self.y - 480) % 600
         self.sprite = self.sprite * (-1)
-        if x1 > 300 and yInit == 0:
+        if x1 > 300 and (self.y - 480) % 600 == 0 and x1 != lista1[0]:
             self.x = x1
 
 
-    def moverDerecha(self):
+    def moverDerecha(self, lista1, lista2):
         x2 = self.x + self.dx
-        yInit = (self.y - 480) % 600
         self.sprite = self.sprite * (-1)
-        if x2 < 3260 and yInit == 0:
+        if x2 < 3260 and (self.y - 480) % 600 == 0 and x2 != lista1[0]:
             self.x = x2
 
-    def moverArriba(self):
+    def moverArriba(self, lista1, lista2):
         y1 = self.y + self.dy
-        xInit = (self.x - 360) % 480
         self.sprite = self.sprite * (-1)
-        if y1 < 2940 and xInit == 0:
+        if y1 < 2940 and (self.x - 360) % 480 == 0 and y1 != lista1[1]:
             self.y = y1
 
-    def moverAbajo(self):
+    def moverAbajo(self, lista1, lista2):
         y2 = self.y - self.dy
-        xInit = (self.x - 360) % 480
         self.sprite = self.sprite * (-1)
-        if y2 > 420 and xInit == 0:
+        if y2 > 420 and (self.x - 360) % 480 == 0 and y2 != lista1[1]:
             self.y = y2
 
     def dibujar(self):
@@ -56,11 +53,11 @@ class Pug:
         glVertex2f(self.x, self.y - 90)
         glVertex2f(self.x + 30, self.y - 90)
         glVertex2f(self.x + 30, self.y - 150)
-        glVertex2f(self.x - 30 , self.y - 150)
+        glVertex2f(self.x - 30, self.y - 150)
         glVertex2f(self.x - 30, self.y - 90)
         glEnd()
 
-        #Calavera
+        # Calavera
         glBegin(GL_POLYGON)
         glColor4f(255.0 / 255, 255.0 / 255, 255.0 / 255, 1.0)
         glVertex2f(self.x, self.y - 105)
@@ -88,7 +85,8 @@ class Pug:
         glVertex2f(self.x - 5, self.y - 125)
         glEnd()
 
-        if (self.sprite == 1): #Extremidades 1
+        if self.sprite == 1:
+            # Extremidades 1
             # Brazo Izquierdo
             glBegin(GL_POLYGON)
             glColor4f(232.0 / 255, 172.0 / 255, 69.0 / 255, 1.0)
@@ -122,7 +120,7 @@ class Pug:
             glVertex2f(self.x - 10, self.y - 150)
             glEnd()
 
-        else: #Extremidades 2
+        else:  # Extremidades 2
             # Brazo Izquierdo
             glBegin(GL_POLYGON)
             glColor4f(232.0 / 255, 172.0 / 255, 69.0 / 255, 1.0)
@@ -159,7 +157,7 @@ class Pug:
         # Cabeza (Forma)
         glBegin(GL_TRIANGLE_FAN)
         glColor4f(232.0 / 255, 172.0 / 255, 69.0 / 255, 1.0)
-        glVertex2f(self.x , self.y) #Centro de la cabeza
+        glVertex2f(self.x, self.y)  # Centro de la cabeza
         radio = 100
         ang = 2 * pi / 20
         for i in range(21):
@@ -181,12 +179,12 @@ class Pug:
         # Mancha Ojo Izquierdo
         glBegin(GL_TRIANGLE_FAN)
         glColor4f(68.0 / 255, 51.0 / 255, 22.0 / 255, 1.0)
-        glVertex2f(self.x - 70 , self.y + 10)
+        glVertex2f(self.x - 70, self.y + 10)
         radio = 30
         ang = 2 * pi / 20
         for i in range(21):
             ang_i = ang * i
-            glVertex((self.x - 70) + cos(ang_i) * radio, (self.y + 10) +sin(ang_i) * radio)
+            glVertex(self.x - 70 + cos(ang_i) * radio, self.y + 10 + sin(ang_i) * radio)
         glEnd()
 
         # Ojo Izquierdo
@@ -197,7 +195,7 @@ class Pug:
         ang = 2 * pi / 20
         for i in range(21):
             ang_i = ang * i
-            glVertex((self.x - 70) + cos(ang_i) * radio, (self.y + 10) + sin(ang_i) * radio)
+            glVertex(self.x - 70 + cos(ang_i) * radio, self.y + 10 + sin(ang_i) * radio)
         glEnd()
 
         # Lobulo Ojo Izquierdo
@@ -284,9 +282,6 @@ class Pug:
         ang = pi / 20
         for i in range(21):
             ang_i = ang * i
-            glVertex(self.x + cos(ang_i + pi/6) * radio, (self.y + 65) + sin(ang_i + pi/6) * (radio))
+            glVertex(self.x + cos(ang_i + pi / 6) * radio, (self.y + 65) + sin(ang_i + pi / 6) * radio)
         glEnd()
-
-
-
         glPopMatrix()

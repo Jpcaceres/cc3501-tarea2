@@ -1,9 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 from OpenGL.GL import *
+from random import *
 from Muros1 import *
 
 class Vista:
-    def dibujar(self,pug):
+    def dibujar(self, pug):
         # limpia la pantalla
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
@@ -26,6 +27,24 @@ class Vista:
     def poner(self, pug, bomba):
         bomba.transladar(pug.x, pug.y)
         bomba.dibujar()
+
+    def movimientoAleatorio(self, enemigo, lista1, lista2):
+        rN = randint(0, 3)
+        if rN == 0 and enemigo.life == True:
+            enemigo.moverArriba(lista1, lista2)
+            enemigo.dibujar()
+        elif rN == 1 and enemigo.life == True:
+            enemigo.moverAbajo(lista1, lista2)
+            enemigo.dibujar()
+        elif rN == 2 and enemigo.life == True:
+            enemigo.moverIzquierda(lista1, lista2)
+            enemigo.dibujar()
+        elif rN == 3 and enemigo.life == True:
+            enemigo.moverDerecha(lista1, lista2)
+            enemigo.dibujar()
+
+
+
 
 
     def explotar(self, x, y, bomba, m):
@@ -52,6 +71,8 @@ class Vista:
             bomba.explotar(0, 0, m, m)
         else:
             bomba.explotar(m, m, m, m)
+
+
 
 
 
