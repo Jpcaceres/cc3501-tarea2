@@ -104,7 +104,7 @@ enemigo2 = Enemigo2(xEnemigo2, yEnemigo2, 60.0, 75.0)  # Enemigo 2 (Ovni)
 bomba = Bombas()
 m = 2  # Potencia inicial de la Bomba
 listaBombas = [-1, -1]  # Se inicializa con un valor no posible [x, y]
-listaMuros = []
+listaMuros = [-1, -1]
 
 vista = Vista()
 
@@ -117,9 +117,7 @@ while run:
     dt = (t1 - t0)  # diferencial de tiempo asociado a la iteración
     t0 = t1  # actualizar tiempo inicial para siguiente iteración
 
-    vista.dibujar(pug)
-    vista.movimientoAleatorio(enemigo1, listaBombas, listaMuros)
-    vista.movimientoAleatorio(enemigo2, listaBombas, listaMuros)
+    vista.dibujar(pug, enemigo1, enemigo2, listaBombas, listaMuros)
 
     for event in pygame.event.get():
         # para dada evento almacenado en "obtener eventos"
@@ -149,13 +147,16 @@ while run:
         bomba.dibujar()
     elif (tBomba > 2500.0) and (tBomba < 3500.0):
         listaBombas = [-1, -1]
-        topeBomba(bomba, pug, enemigo1, enemigo2, m, run)
+        topeBomba(bomba, pug, m)
+        topeBomba(bomba, enemigo1, m)
+        topeBomba(bomba, enemigo2, m)
         vista.explotar(xBomba, yBomba, bomba, m)
 
     run = tope(pug, enemigo1, enemigo2, run)
     run = comprobarLife(pug, run)
 
     tBomba = tBomba + dt
+
     pygame.display.flip()  # redibuja la ventana con el buffer almacenado
     clock.tick(FPS)  # Setea el reloj del juego para ajustar a la cantidad de FPS dados
 

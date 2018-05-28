@@ -21,26 +21,33 @@ class Pug:
     def moverIzquierda(self, lista1, lista2):
         x1 = self.x - self.dx
         self.sprite = self.sprite * (-1)
-        if x1 > 300 and (self.y - 480) % 600 == 0 and x1 != lista1[0]:
+        if x1 == lista1[0] and self.y == lista1[1]:
+            self.x = self.x
+        elif x1 > 300 and (self.y - 480) % 600 == 0:
             self.x = x1
-
 
     def moverDerecha(self, lista1, lista2):
         x2 = self.x + self.dx
         self.sprite = self.sprite * (-1)
-        if x2 < 3260 and (self.y - 480) % 600 == 0 and x2 != lista1[0]:
+        if self.y == lista1[1] and x2 == lista1[0]:
+            self.y = self.y
+        elif x2 < 3260 and (self.y - 480) % 600 == 0:
             self.x = x2
 
     def moverArriba(self, lista1, lista2):
         y1 = self.y + self.dy
         self.sprite = self.sprite * (-1)
-        if y1 < 2940 and (self.x - 360) % 480 == 0 and y1 != lista1[1]:
+        if y1 == lista1[1] and self.x == lista1[0]:
+            self.y = self.y
+        elif y1 < 2940 and (self.x - 360) % 480 == 0:
             self.y = y1
 
     def moverAbajo(self, lista1, lista2):
         y2 = self.y - self.dy
         self.sprite = self.sprite * (-1)
-        if y2 > 420 and (self.x - 360) % 480 == 0 and y2 != lista1[1]:
+        if y2 == lista1[1] and self.x == lista1[0]:
+            self.y = self.y
+        elif y2 > 420 and (self.x - 360) % 480 == 0:
             self.y = y2
 
     def dibujar(self):
