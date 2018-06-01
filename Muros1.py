@@ -1,10 +1,11 @@
 # -*- coding: iso-8859-1 -*-
 from OpenGL.GL import *
 
+
 class Muros1:
     def __init__(self, x, y):
-        self.x = x # Centro muro indestructible eje x
-        self.y = y # Centro muro indestructible eje y
+        self.x = x  # Centro muro indestructible eje x
+        self.y = y  # Centro muro indestructible eje y
 
 
     def dibujar(self):

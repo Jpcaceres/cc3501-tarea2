@@ -2,6 +2,7 @@
 from OpenGL.GL import *
 from random import *
 from Muros1 import *
+from Muros2 import *
 from Utils import *
 
 
@@ -22,15 +23,17 @@ class Vista:
                             murosInterior.dibujar()
         # dibuja pug
         pug.dibujar()
+        vistaMuros(listaMuros)
         # dibujar enemigos
         movimientoAleatorio(enemigo1, listaBombas, listaMuros)
         movimientoAleatorio(enemigo2, listaBombas, listaMuros)
         glLoadIdentity()
 
-
     def poner(self, pug, bomba):
         bomba.transladar(pug.x, pug.y)
         bomba.dibujar()
+
+
 
     def explotar(self, x, y, bomba, m):
         bomba.transladar(x, y + 30)
@@ -56,9 +59,6 @@ class Vista:
             bomba.explotar(0, 0, m, m)
         else:
             bomba.explotar(m, m, m, m)
-
-
-
 
 
 

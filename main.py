@@ -1,7 +1,7 @@
 
 # coding=utf-8
 """
-Bomberman
+Bomberpug (Bomberman)
 @Autor Juan Cáceres
 """
 #############################################################################
@@ -102,9 +102,10 @@ yEnemigo2 = randrange(1080, 2880, 600)  # procurando no empezar en la misma posi
 enemigo2 = Enemigo2(xEnemigo2, yEnemigo2, 60.0, 75.0)  # Enemigo 2 (Ovni)
 
 bomba = Bombas()
-m = 2  # Potencia inicial de la Bomba
-listaBombas = [-1, -1]  # Se inicializa con un valor no posible [x, y]
-listaMuros = [-1, -1]
+m = 3  # Potencia inicial de la Bomba
+listaBombas = [-100, -100]  # Se inicializa con un valor no posible [x, y]
+listaMuros = ponerMuros(40)
+
 
 vista = Vista()
 
@@ -118,7 +119,6 @@ while run:
     t0 = t1  # actualizar tiempo inicial para siguiente iteración
 
     vista.dibujar(pug, enemigo1, enemigo2, listaBombas, listaMuros)
-
     for event in pygame.event.get():
         # para dada evento almacenado en "obtener eventos"
         if event.type == QUIT:  # cick sobre cerrar para salir
@@ -146,7 +146,7 @@ while run:
     if tBomba < 3000.0:  # 3 segundos aproximados
         bomba.dibujar()
     elif (tBomba > 2500.0) and (tBomba < 3500.0):
-        listaBombas = [-1, -1]
+        listaBombas = [-100, -100]
         topeBomba(bomba, pug, m)
         topeBomba(bomba, enemigo1, m)
         topeBomba(bomba, enemigo2, m)

@@ -1,11 +1,11 @@
 # -*- coding: iso-8859-1 -*-
 
 from OpenGL.GL import *
+from Utils import *
 from math import *
 
 
 class Pug:
-
     def __init__(self, x, y, dx, dy):
         self.x = x  # Centro cabeza eje x
         self.y = y  # Centro cabeza eje y
@@ -21,7 +21,7 @@ class Pug:
     def moverIzquierda(self, lista1, lista2):
         x1 = self.x - self.dx
         self.sprite = self.sprite * (-1)
-        if x1 == lista1[0] and self.y == lista1[1]:
+        if (x1 == lista1[0] and self.y == lista1[1]) or ([x1 * 0.5 - 60, self.y * 0.4 - 12] in lista2):
             self.x = self.x
         elif x1 > 300 and (self.y - 480) % 600 == 0:
             self.x = x1
@@ -29,7 +29,7 @@ class Pug:
     def moverDerecha(self, lista1, lista2):
         x2 = self.x + self.dx
         self.sprite = self.sprite * (-1)
-        if self.y == lista1[1] and x2 == lista1[0]:
+        if (self.y == lista1[1] and x2 == lista1[0]) or ([x2 * 0.5 + 60, self.y * 0.4 - 12] in lista2):
             self.y = self.y
         elif x2 < 3260 and (self.y - 480) % 600 == 0:
             self.x = x2
@@ -37,7 +37,7 @@ class Pug:
     def moverArriba(self, lista1, lista2):
         y1 = self.y + self.dy
         self.sprite = self.sprite * (-1)
-        if y1 == lista1[1] and self.x == lista1[0]:
+        if (y1 == lista1[1] and self.x == lista1[0]) or ([self.x * 0.5, y1 * 0.4 + 48] in lista2):
             self.y = self.y
         elif y1 < 2940 and (self.x - 360) % 480 == 0:
             self.y = y1
@@ -45,7 +45,7 @@ class Pug:
     def moverAbajo(self, lista1, lista2):
         y2 = self.y - self.dy
         self.sprite = self.sprite * (-1)
-        if y2 == lista1[1] and self.x == lista1[0]:
+        if (y2 == lista1[1] and self.x == lista1[0]) or([self.x * 0.5, y2 * 0.4 - 72] in lista2):
             self.y = self.y
         elif y2 > 420 and (self.x - 360) % 480 == 0:
             self.y = y2

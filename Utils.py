@@ -1,4 +1,5 @@
 from random import *
+from Muros2 import *
 
 
 def tope(pug, enemigo1, enemigo2, run):
@@ -48,5 +49,31 @@ def comprobarLife(pug, run):
         return False
     else:
         return run
+
+
+def ponerMuros(n):
+    listaMuros = []
+    num = 0
+    while num < n:
+        i = randrange(1, 14, 1)
+        j = randrange(2, 10, 1)
+        if (i % 2 != 0 and j % 2 != 0) or (i % 2 == 0 and j % 2 != 0) or (i % 2 != 0 and j % 2 == 0):  # Si hay muros indestructibles
+            if listaMuros.count([60 + 120 * i, 60 + 120 * j]) == 0:
+                listaMuros.append([60 + 120 * i, 60 + 120 * j])
+                num = num + 1
+    return listaMuros
+
+
+def vistaMuros(listaMuros):
+    for x in listaMuros:
+        muros2 = Muros2(x[0], x[1])
+        muros2.dibujar()
+
+
+
+
+
+
+
 
 
