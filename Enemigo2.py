@@ -12,6 +12,10 @@ class Enemigo2:  # Ovni
         self.dy = dy
         self.life = True
 
+    def morir(self):
+        self.x = -100
+        self.y = -100
+
     def moverIzquierda(self, lista1, lista2):
         x1 = self.x - self.dx
         if (x1 == lista1[0] and self.y == lista1[1]) or ([x1 * 0.5 - 60, self.y * 0.4 - 12] in lista2):

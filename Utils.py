@@ -2,11 +2,17 @@ from random import *
 from Muros2 import *
 
 
-def tope(pug, enemigo1, enemigo2, run):
+def tope(pug, enemigo1, enemigo2, enemigo3, enemigo4, run):
     if abs(pug.x - enemigo1.x) < 60 and abs(pug.y - enemigo1.y) < 60:
         print('GAMER OVER (TOPE)')
         return False
-    elif abs(pug.x - enemigo2.x) < 60 and abs(pug.y - enemigo2.y) < 60:
+    if abs(pug.x - enemigo2.x) < 60 and abs(pug.y - enemigo2.y) < 60:
+        print('GAMER OVER (TOPE)')
+        return False
+    if abs(pug.x - enemigo3.x) < 60 and abs(pug.y - enemigo3.y) < 60:
+        print('GAMER OVER (TOPE)')
+        return False
+    if abs(pug.x - enemigo4.x) < 60 and abs(pug.y - enemigo4.y) < 60:
         print('GAMER OVER (TOPE)')
         return False
     else:
@@ -50,17 +56,29 @@ def comprobarLife(pug, run):
     else:
         return run
 
+def comprobarLifeEnemigos(enemigo1, enemigo2, enemigo3, enemigo4):
+    if enemigo1.life == False:
+        enemigo1.morir()
+    if enemigo2.life == False:
+        enemigo2.morir()
+    if enemigo3.life == False:
+        enemigo3.morir()
+    if enemigo4.life == False:
+        enemigo4.morir()
 
-def ponerMuros(n):
+
+
+def ponerMuros(n, posInit):
     listaMuros = []
     num = 0
     while num < n:
         i = randrange(1, 14, 1)
         j = randrange(2, 10, 1)
-        if (i % 2 != 0 and j % 2 != 0) or (i % 2 == 0 and j % 2 != 0) or (i % 2 != 0 and j % 2 == 0):  # Si hay muros indestructibles
-            if listaMuros.count([60 + 120 * i, 60 + 120 * j]) == 0:
-                listaMuros.append([60 + 120 * i, 60 + 120 * j])
-                num = num + 1
+        if ([60 + 120 * i, 60 + 120 * j] != posInit[0]) or ([60 + 120 * i, 60 + 120 * j] != posInit[1]) or ([60 + 120 * i, 60 + 120 * j] != posInit[2]) or ([60 + 120 * i, 60 + 120 * j] != posInit[3]):
+            if (i % 2 != 0 and j % 2 != 0) or (i % 2 == 0 and j % 2 != 0) or (i % 2 != 0 and j % 2 == 0): # Si hay muros indestructibles
+                if listaMuros.count([60 + 120 * i, 60 + 120 * j]) == 0:
+                    listaMuros.append([60 + 120 * i, 60 + 120 * j])
+                    num = num + 1
     return listaMuros
 
 

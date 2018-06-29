@@ -1,5 +1,4 @@
 # -*- coding: iso-8859-1 -*-
-
 from OpenGL.GL import *
 from math import *
 
@@ -11,6 +10,11 @@ class Enemigo1:  # Fantasma
         self.dx = dx
         self.dy = dy
         self.life = True
+
+    
+    def morir(self):
+        self.x = -100
+        self.y = -100
 
     def moverIzquierda(self, lista1, lista2):
         x1 = self.x - self.dx

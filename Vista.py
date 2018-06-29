@@ -3,12 +3,14 @@ from OpenGL.GL import *
 from random import *
 from Muros1 import *
 from Muros2 import *
+from MulExplo import *
+from MulVel import *
 from Utils import *
 
 
 class Vista:
 
-    def dibujar(self, pug, enemigo1, enemigo2, listaBombas, listaMuros):
+    def dibujar(self, pug, enemigo1, enemigo2, enemigo3, enemigo4, listaBombas, listaMuros):
         # limpia la pantalla
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         # Creacion de escena
@@ -23,10 +25,13 @@ class Vista:
                             murosInterior.dibujar()
         # dibuja pug
         pug.dibujar()
+        MulVel(0,0).dibujar()
         vistaMuros(listaMuros)
         # dibujar enemigos
         movimientoAleatorio(enemigo1, listaBombas, listaMuros)
         movimientoAleatorio(enemigo2, listaBombas, listaMuros)
+        movimientoAleatorio(enemigo3, listaBombas, listaMuros)
+        movimientoAleatorio(enemigo4, listaBombas, listaMuros)
         glLoadIdentity()
 
     def poner(self, pug, bomba):

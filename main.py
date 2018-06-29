@@ -89,7 +89,7 @@ tBomba = 9999  # Tiempo que la bomba lleva puesta (9999 valor grande)
 xPug = 360  # Coordenada x inicial del pug
 yPug = 480  # Coordenada y inicial del pug
 
-# Creación de los Modelos
+# Creación de los Personajes
 
 pug = Pug(xPug, yPug, 120.0, 150.0)  # Personaje principal (Pug)
 
@@ -101,10 +101,20 @@ xEnemigo2 = randrange(840, 3240, 480)   # Posición  inicial aleatoria del enemi
 yEnemigo2 = randrange(1080, 2880, 600)  # procurando no empezar en la misma posicion del pug
 enemigo2 = Enemigo2(xEnemigo2, yEnemigo2, 60.0, 75.0)  # Enemigo 2 (Ovni)
 
+xEnemigo3 = randrange(840, 3240, 480)  # Posición  inicial aleatoria del enemigo1
+yEnemigo3 = randrange(1080, 2880, 600)  # procurando no empezar en la misma posicion del pug
+enemigo3 = Enemigo1(xEnemigo3, yEnemigo3, 60.0, 75.0)  # Enemigo 1 (Fantasma)
+
+xEnemigo4 = randrange(840, 3240, 480)  # Posición  inicial aleatoria del enemigo1
+yEnemigo4 = randrange(1080, 2880, 600)  # procurando no empezar en la misma posicion del pug
+enemigo4 = Enemigo2(xEnemigo4, yEnemigo4, 60.0, 75.0)  # Enemigo 1 (Fantasma)
+
+posInit = [[xEnemigo1, yEnemigo1], [xEnemigo2, yEnemigo2], [xEnemigo3, yEnemigo3], [xEnemigo4, yEnemigo4]] # Posiciones iniciales de los enemigos
+
 bomba = Bombas()
-m = 3  # Potencia inicial de la Bomba
+m = 1  # Potencia inicial de la Bomba
 listaBombas = [-100, -100]  # Se inicializa con un valor no posible [x, y]
-listaMuros = ponerMuros(40)
+listaMuros = ponerMuros(20, posInit)
 
 
 vista = Vista()
@@ -118,7 +128,8 @@ while run:
     dt = (t1 - t0)  # diferencial de tiempo asociado a la iteración
     t0 = t1  # actualizar tiempo inicial para siguiente iteración
 
-    vista.dibujar(pug, enemigo1, enemigo2, listaBombas, listaMuros)
+    vista.dibujar(pug, enemigo1, enemigo2, enemigo3, enemigo4, listaBombas, listaMuros)
+
     for event in pygame.event.get():
         # para dada evento almacenado en "obtener eventos"
         if event.type == QUIT:  # cick sobre cerrar para salir
@@ -150,10 +161,13 @@ while run:
         topeBomba(bomba, pug, m)
         topeBomba(bomba, enemigo1, m)
         topeBomba(bomba, enemigo2, m)
+        topeBomba(bomba, enemigo3, m)
+        topeBomba(bomba, enemigo4, m)
         vista.explotar(xBomba, yBomba, bomba, m)
 
-    run = tope(pug, enemigo1, enemigo2, run)
+    run = tope(pug, enemigo1, enemigo2, enemigo3, enemigo4, run)
     run = comprobarLife(pug, run)
+    comprobarLifeEnemigos(enemigo1, enemigo2, enemigo3, enemigo4)
 
     tBomba = tBomba + dt
 
