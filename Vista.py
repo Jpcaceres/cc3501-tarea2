@@ -10,7 +10,7 @@ from Utils import *
 
 class Vista:
 
-    def dibujar(self, pug, enemigo1, enemigo2, enemigo3, enemigo4, listaBombas, listaMuros):
+    def dibujar(self, pug, enemigo1, enemigo2, enemigo3, enemigo4, listaBombas, listaMuros, mulExplo, mulVel, puerta):
         # limpia la pantalla
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         # Creacion de escena
@@ -25,8 +25,13 @@ class Vista:
                             murosInterior.dibujar()
         # dibuja pug
         pug.dibujar()
-        MulVel(0,0).dibujar()
+        if mulExplo.life == True:
+            mulExplo.dibujar()
+        if mulVel.life == True:
+            mulVel.dibujar()
+        puerta.dibujar()
         vistaMuros(listaMuros)
+
         # dibujar enemigos
         movimientoAleatorio(enemigo1, listaBombas, listaMuros)
         movimientoAleatorio(enemigo2, listaBombas, listaMuros)

@@ -4,9 +4,10 @@ from Bombas import *
 
 
 class MulExplo:
-    def __init__(self, x, y):
-        self.x = 180  # Centro muro indestructible eje x
-        self.y = 180  # Centro muro indestructible eje y
+    def __init__(self, x, y, life):
+        self.x = x  # Centro muro indestructible eje x
+        self.y = y # Centro muro indestructible eje y
+        self.life = life
 
     def dibujar(self):
         glPushMatrix()
@@ -28,7 +29,7 @@ class MulExplo:
         glVertex2f(self.x - 50, self.y - 50)
         glEnd()
         bomba = Bombas()
-        bomba.transladar(180 * 4,180 * 5)
+        bomba.transladar(4 * self.x, 5 *self.y)
         bomba.dibujar()
 
 

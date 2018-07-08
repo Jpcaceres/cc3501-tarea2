@@ -4,9 +4,10 @@ from math import *
 
 
 class MulVel:
-    def __init__(self, x, y):
-        self.x = 180  # Centro muro indestructible eje x
-        self.y = 180  # Centro muro indestructible eje y
+    def __init__(self, x, y, life):
+        self.x = x  # Centro muro indestructible eje x
+        self.y = y  # Centro muro indestructible eje y
+        self.life = life
 
     def dibujar(self):
         glPushMatrix()

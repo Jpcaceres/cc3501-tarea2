@@ -4,8 +4,8 @@ from math import *
 
 class Bombas:
     def __init__(self):
-        self.x = -30 # Centro Bomba
-        self.y = -30 # Centro Bomba
+        self.x = -3000 # Centro Bomba
+        self.y = -3000 # Centro Bomba
 
     def transladar(self, x, y):
         self.x = x

@@ -14,10 +14,6 @@ class Pug:
         self.life = True
         self.sprite = 1
 
-    def velocidadPor2(self):
-        self.dx = 2 * self.dx
-        self.dy = 2 * self.dy
-
     def moverIzquierda(self, lista1, lista2):
         x1 = self.x - self.dx
         self.sprite = self.sprite * (-1)
