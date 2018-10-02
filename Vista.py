@@ -25,6 +25,8 @@ class Vista:
                             murosInterior.dibujar()
         # dibuja pug
         pug.dibujar()
+
+
         if mulExplo.life == True:
             mulExplo.dibujar()
         if mulVel.life == True:
